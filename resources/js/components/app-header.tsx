@@ -23,22 +23,22 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Livros',
-        href: route('books.index'),
+        href: '/books',
         icon: LibraryBig,
     },
     {
         title: 'Quadrinhos',
-        href: route('comics.index'),
+        href: '/comics',
         icon: BookOpen,
     },
     {
         title: 'Geloteca',
-        href: route('geloteca.index'),
+        href: '/geloteca',
         icon: Refrigerator,
     },
     {
         title: 'Leitores Cadastrados',
-        href: route('readers.index'),
+        href: '/readers',
         icon: Users,
     },
 ];

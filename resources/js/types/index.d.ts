@@ -41,3 +41,18 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+////////////////////////////////// Readers //////////////////////////////////
+export type Reader = {
+    id: string
+    name: string,
+    phone: string,
+    email: string,
+    marital_status: string,
+    cpf_cnpj: string,
+    nationality: string,
+    age: number,
+    gender: string,
+    profession: string,
+    address: string,
+}
