@@ -6,7 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { DataTablePagination } from "./data-table-pagination";
 import { Input } from "@/components/ui/input";
 import { usePage } from "@inertiajs/react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -22,19 +23,19 @@ export function DataTable<TData, TValue>({ columns, data, createButton, filters 
 
     const flash = usePage().props.flash as { success?: string; error?: string };
 
-    // if (flash.success) {
-    //     toast.success("Aviso:", {
-    //         description: flash.success,
-    //     });
-    //     flash.success = undefined;
-    // }
+    if (flash?.success) {
+        toast.success("Aviso:", {
+            description: flash.success,
+        });
+        flash.success = undefined;
+    }
 
-    // if (flash.error) {
-    //     toast.error("Aviso:", {
-    //         description: flash.error,
-    //     });
-    //     flash.error = undefined;
-    // }
+    if (flash?.error) {
+        toast.error("Aviso:", {
+            description: flash.error,
+        });
+        flash.error = undefined;
+    }
 
     const table = useReactTable({
         data,

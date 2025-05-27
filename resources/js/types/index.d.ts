@@ -49,10 +49,39 @@ export type Reader = {
     phone: string,
     email: string,
     marital_status: string,
-    cpf_cnpj: string,
+    cpf: string,
     nationality: string,
     age: number,
     gender: string,
     profession: string,
     address: string,
+}
+
+export interface ReaderFormProps {
+    name: string,
+    phone: string,
+    email: string,
+    maritalStatus: string,
+    cpf: string,
+    nationality: string,
+    age: number|null,
+    gender: string,
+    profession: string,
+    address: string,
+    setName: (value: string) => void;
+    setPhone: (value: string) => void;
+    setEmail: (value: string) => void;
+    setMaritalStatus: (value: string) => void;
+    setCpf: (value: string) => void;
+    setNationality: (value: string) => void;
+    setAge: (value: number|null) => void;
+    setGender: (value: string) => void;
+    setProfession: (value: string) => void;
+    setAddress: (value: string) => void;
+}
+
+export interface UpdateReaderDialogProps {
+    reader: Reader;
+    open: boolean;
+    setOpen: (value: boolean) => void;
 }

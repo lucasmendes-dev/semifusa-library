@@ -1,37 +1,37 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ReaderForm } from "./ReaderForm";
+import { Pencil } from 'lucide-react';
 import { router } from "@inertiajs/react";
+import { useState } from "react";
+import { ReaderForm } from "./ReaderForm";
+import { UpdateReaderDialogProps } from "@/types";
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
     DialogHeader,
     DialogTitle,
+    DialogTrigger,
     DialogFooter,
     DialogDescription
 } from "@/components/ui/dialog";
 
-export function ReaderCreateDialog() {
-    const [open, setOpen] = useState(false);
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [maritalStatus, setMaritalStatus] = useState("");
-    const [cpf, setCpf] = useState("");
-    const [nationality, setNationality] = useState("");
-    const [age, setAge] = useState<number|null>(null);
-    const [gender, setGender] = useState("");
-    const [profession, setProfession] = useState("");
-    const [address, setAddress] = useState("");
+export function UpdateDialog({
+    reader,
+    open,
+    setOpen
+}: UpdateReaderDialogProps) {
+    const [name, setName] = useState(reader.name);
+    const [phone, setPhone] = useState(reader.phone);
+    const [email, setEmail] = useState(reader.email);
+    const [maritalStatus, setMaritalStatus] = useState(reader.marital_status);
+    const [cpf, setCpf] = useState(reader.cpf);
+    const [nationality, setNationality] = useState(reader.nationality);
+    const [age, setAge] = useState<number|null>(reader.age);
+    const [gender, setGender] = useState(reader.gender);
+    const [profession, setProfession] = useState(reader.profession);
+    const [address, setAddress] = useState(reader.address);
 
-
-    const handleCreate = () => {
-        if (!name || !phone || !email) {
-            alert("Os campos com * são obrigatórios.");
-            return;
-        }
-        router.post("/readers", {
+    const handleUpdate = () => {
+        router.put(`/readers/${reader.id}`, {
             name,
             phone,
             email,
@@ -43,23 +43,27 @@ export function ReaderCreateDialog() {
             profession,
             address,
         }, {
-            onSuccess: () => setOpen(false),
             preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                setOpen(false);
+            }
         });
-    };
-
+    }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="cursor-pointer">Cadastrar Leitor</Button>
+                <Button className="h-8 w-8 bg-blue-400 cursor-pointer">
+                    <Pencil />
+                </Button>
             </DialogTrigger>
 
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Adicionar novo Leitor</DialogTitle>
+                    <DialogTitle>Editar Leitor: <span className="text-blue-400">{ reader.name }</span></DialogTitle>
                 </DialogHeader>
 
-                <DialogDescription>Insira os dados para fazer o cadastro.</DialogDescription>
+                <DialogDescription>Verifique os dados antes de alterá-los.</DialogDescription>
 
                 <ReaderForm
                     name={name}
@@ -85,7 +89,7 @@ export function ReaderCreateDialog() {
                 />
 
                 <DialogFooter>
-                    <Button onClick={handleCreate} className="cursor-pointer">Cadastar Leitor</Button>
+                    <Button type="submit" className="cursor-pointer bg-blue-400" onClick={handleUpdate}>Salvar Alterações</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

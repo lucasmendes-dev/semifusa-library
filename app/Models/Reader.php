@@ -12,7 +12,7 @@ class Reader extends Model
         'phone',
         'email',
         'marital_status',
-        'cpf_cnpj',
+        'cpf',
         'nationality',
         'age',
         'gender',

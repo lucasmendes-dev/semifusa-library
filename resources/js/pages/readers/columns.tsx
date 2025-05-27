@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { AlertDialogDelete } from "@/components/AlertDialogDelete";
-//import { UpdateDialog } from "./UpdateDialog";
+import { UpdateDialog } from "./UpdateDialog";
 import { useState } from "react";
 import { formatPhoneNumber } from "@/utils/functions";
 import { Reader } from "@/types";
@@ -92,11 +92,11 @@ export const columns: ColumnDef<Reader>[] = [
             const [isDialogOpen, setIsDialogOpen] = useState(false);
             return (
                 <div>
-                    {/* <UpdateDialog
+                    <UpdateDialog
                         reader={reader}
                         open={isDialogOpen}
                         setOpen={setIsDialogOpen}
-                    /> */}
+                    />
                     <AlertDialogDelete objectName={reader} deleteRoute="readers"/>
                 </div>
             );

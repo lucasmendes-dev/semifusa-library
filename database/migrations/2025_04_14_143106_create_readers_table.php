@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->enum('marital_status', ['single', 'married']);
-            $table->string('cpf_cnpj');
-            $table->string('nationality');
-            $table->integer('age');
+            $table->string('cpf')->nullable();
+            $table->string('nationality')->nullable();
+            $table->integer('age')->nullable();
             $table->enum('gender', ['M', 'F', 'O', 'N']);
-            $table->string('profession');
+            $table->string('profession')->nullable();
             $table->text('address');
             $table->timestamps();
         });

@@ -24,6 +24,23 @@ export function formatPhoneNumber(value: string): string {
     return value;
 }
 
+export function formatCpfNumber(cpfString: string): string {
+    const digits = cpfString.replace(/\D/g, '');
+    const limited = digits.slice(0, 11);
+
+    let formattedValue = '';
+    if (limited.length <= 3) {
+        formattedValue = limited;
+    } else if (limited.length <= 6) {
+        formattedValue = `${limited.slice(0, 3)}.${limited.slice(3)}`;
+    } else if (limited.length <= 9) {
+        formattedValue = `${limited.slice(0, 3)}.${limited.slice(3, 6)}.${limited.slice(6)}`;
+    } else {
+        formattedValue = `${limited.slice(0, 3)}.${limited.slice(3, 6)}.${limited.slice(6, 9)}-${limited.slice(9)}`;
+    }
+    return formattedValue;
+}
+
 export function formatToBRCurrency(price: number) {
     return new Intl.NumberFormat("pt-BR", {
         style: "currency",

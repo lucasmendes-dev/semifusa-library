@@ -29,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Readers
     Route::get('/readers', [ReaderController::class, 'index'])->name('readers.index');
+    Route::delete('/readers/{id}', [ReaderController::class, 'destroy'])->name('readers.destroy');
+    Route::put('/readers/{id}', [ReaderController::class, 'update'])->name('readers.update');
+    Route::post('/readers', [ReaderController::class, 'store'])->name('readers.store');
 });
 
 require __DIR__.'/settings.php';
