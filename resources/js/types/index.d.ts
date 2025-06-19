@@ -85,3 +85,47 @@ export interface UpdateReaderDialogProps {
     open: boolean;
     setOpen: (value: boolean) => void;
 }
+
+////////////////////////////////// Readers //////////////////////////////////
+export type Book = {
+    id: string
+    title: string,
+    subtitle: string,
+    author: string,
+    additional_information: string,
+    inventory_number: string,
+    edition: string,
+    type: string,
+    status: string,
+}
+
+export interface BookFormProps {
+    title: string,
+    subtitle: string,
+    author: string,
+    additionalInformation: string,
+    inventoryNumber: string,
+    edition: string,
+    type: string,
+    status: string,
+    setTile: (value: string) => void;
+    setSubTitle: (value: string) => void;
+    setAuthor: (value: string) => void;
+    setAdditionalInformation: (value: string) => void;
+    setInventoryNumber: (value: string) => void;
+    setEdition: (value: string) => void;
+    setType: (value: string) => void;
+    setStatus: (value: string) => void;
+}
+
+export interface UpdateBookDialogProps {
+    book: Book;
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}
+
+type BooksProps = {
+    mainLibrary: Book[];
+    comics: Book[];
+    geloteca: Book[];
+};

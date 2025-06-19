@@ -27,16 +27,6 @@ const mainNavItems: NavItem[] = [
         icon: LibraryBig,
     },
     {
-        title: 'Quadrinhos',
-        href: '/comics',
-        icon: BookOpen,
-    },
-    {
-        title: 'Geloteca',
-        href: '/geloteca',
-        icon: Refrigerator,
-    },
-    {
         title: 'Leitores Cadastrados',
         href: '/readers',
         icon: Users,

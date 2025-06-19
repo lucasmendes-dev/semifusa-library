@@ -30,9 +30,6 @@ class ReaderController extends Controller
         $reader = $this->readerService->getReaderByID($id);
         $data = $this->readerService->handleData($request->validated());
 
-        if ($data['cpf_error']) {
-            return redirect()->back()->with('error', 'O CPF digitado ' . $request->cpf . ' é inválido.');
-        }
         $reader->update($data);
 
         return redirect()->back()->with('success', 'Os dados do(a) leitor(a) "' . $reader->name . '" foram atualizados!');

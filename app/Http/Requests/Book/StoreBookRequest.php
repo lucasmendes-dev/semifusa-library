@@ -22,7 +22,14 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string'],
+            'subtitle' => ['nullable', 'string'],
+            'author' => ['required', 'string'],
+            'additional_information' => ['nullable', 'string'],
+            'inventory_number' => ['nullable', 'string'],
+            'edition' => ['nullable', 'string'],
+            'type' => ['required', 'string'], 
+            'status' => ['required', 'string'],
         ];
     }
 }

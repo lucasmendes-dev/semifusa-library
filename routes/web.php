@@ -20,12 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Books
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
-
-    // Comics
-    Route::get('/comics', [BookController::class, 'comics'])->name('comics.index');
-
-    // Geloteca
-    Route::get('/geloteca', [BookController::class, 'geloteca'])->name('geloteca.index');
+    Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::put('/books/{id}', [BookController::class, 'update'])->name('books.update');
+    Route::post('/books', [BookController::class, 'store'])->name('books.store');
     
     // Readers
     Route::get('/readers', [ReaderController::class, 'index'])->name('readers.index');

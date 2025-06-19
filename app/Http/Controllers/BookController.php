@@ -2,39 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
+use App\Http\Requests\Book\StoreBookRequest;
+use App\Http\Requests\Book\UpdateBookRequest;
 use App\Models\Book;
+use App\Services\BookService;
+use Inertia\Inertia;
 
 class BookController extends Controller
 {
+    public function __construct(private BookService $bookService) {}
+
     public function index()
     {
-        dd("books");
+        $mainLibrary = Book::where('type', 'main_library')->get();
+        $comics = Book::where('type', 'comics')->get();
+        $geloteca = Book::where('type', 'geloteca')->get();
+
+        return Inertia::render('books/index', [
+            'mainLibrary' => $mainLibrary ?? [],
+            'comics' => $comics ?? [],
+            'geloteca' => $geloteca ?? [],
+        ]);
     }
 
     public function store(StoreBookRequest $request)
     {
-        //
+        Book::create($request->validated());
+
+        return redirect()->back()->with('success', 'Livro "' . $request->title . '" cadastrado(a)!');
     }
 
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, string $id)
     {
-        //
+        $book = $this->bookService->getBookByID($id);
+        $data = $request->validated();
+
+        $book->update($data);
+
+        return redirect()->back()->with('success', 'Os dados do livro "' . $book->title . '" foram atualizados!');
     }
 
-    public function destroy(Book $book)
+    public function destroy(string $id)
     {
-        //
-    }
+        $book = $this->bookService->getBookByID($id);
+        $bookTitle = $book->title;
 
-    public function comics()
-    {
-        dd("comics");
-    }
+        $book->delete();
 
-    public function geloteca()
-    {
-        dd("geloteca");
+        return redirect()->back()->with('success', 'Livro "' . $bookTitle . '" deletado com sucesso!');
     }
 }

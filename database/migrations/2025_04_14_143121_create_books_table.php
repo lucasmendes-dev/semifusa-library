@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('author');
             $table->text('additional_information')->nullable();
             $table->integer('inventory_number')->nullable();
-            $table->string('edition');
+            $table->string('edition')->nullable();
             $table->enum('type', ['main_library', 'comics', 'geloteca']);
             $table->enum('status', ['available', 'unavailable', 'loaned']);
             $table->timestamps();
