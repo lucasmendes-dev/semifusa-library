@@ -11,14 +11,14 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Globe, LayoutGrid, Menu, LibraryBig, Refrigerator, Users } from 'lucide-react';
+import { Globe, LayoutGrid, Menu, LibraryBig, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Empréstimos',
-        href: '/dashboard',
+        href: '/loans',
         icon: LayoutGrid,
     },
     {
@@ -99,7 +99,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         </Sheet>
                     </div>
 
-                    <Link href="/dashboard" prefetch className="flex items-center space-x-2">
+                    <Link href="/loans" prefetch className="flex items-center space-x-2">
                         <AppLogo />
                     </Link>
 

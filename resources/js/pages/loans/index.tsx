@@ -1,16 +1,31 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, LoanIndexProps } from '@/types';
 import { Head } from '@inertiajs/react';
+import { DataTable } from '@/components/data-table';
+import { LoanCreateDialog } from './LoanCreateDialog';
+import { getLoanColumns } from './columns';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Empréstimos',
-        href: '/dashboard',
+        href: '/loans',
     },
 ];
 
-export default function Dashboard() {
+const filters: string[] = [
+    'name',
+    'phone',
+    'email',
+];
+
+export default function Loans({
+    loans,
+    readers,
+    books,
+}: LoanIndexProps) {
+    const loanColumns = getLoanColumns(readers);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Empréstimos" />
@@ -26,8 +41,14 @@ export default function Dashboard() {
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
                     </div>
                 </div>
+
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                    <DataTable
+                        columns={loanColumns}
+                        data={loans}
+                        createButton={<LoanCreateDialog readers={readers} books={books}/>}
+                        filters={filters}
+                    />    
                 </div>
             </div>
         </AppLayout>

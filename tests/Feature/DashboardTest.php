@@ -3,11 +3,11 @@
 use App\Models\User;
 
 test('guests are redirected to the login page', function () {
-    $this->get('/dashboard')->assertRedirect('/login');
+    $this->get('/loans')->assertRedirect('/login');
 });
 
-test('authenticated users can visit the dashboard', function () {
+test('authenticated users can visit the loans', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $this->get('/dashboard')->assertOk();
+    $this->get('/loans')->assertOk();
 });

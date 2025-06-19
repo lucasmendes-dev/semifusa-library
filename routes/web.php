@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\ReaderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,15 +9,17 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect('/dashboard');
+        return redirect('/loans');
     }
     return redirect('/login');
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    // Loans
+    Route::get('/loans', [LoanController::class, 'index'])->name('loans');
+    Route::delete('/loans/{id}', [LoanController::class, 'destroy'])->name('loans.destroy');
+    Route::put('/loans/{id}', [LoanController::class, 'update'])->name('loans.update');
+    Route::post('/loans', [LoanController::class, 'store'])->name('loans.store');
 
     // Books
     Route::get('/books', [BookController::class, 'index'])->name('books.index');

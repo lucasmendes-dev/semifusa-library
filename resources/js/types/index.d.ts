@@ -86,7 +86,7 @@ export interface UpdateReaderDialogProps {
     setOpen: (value: boolean) => void;
 }
 
-////////////////////////////////// Readers //////////////////////////////////
+////////////////////////////////// Books //////////////////////////////////
 export type Book = {
     id: string
     title: string,
@@ -129,3 +129,33 @@ type BooksProps = {
     comics: Book[];
     geloteca: Book[];
 };
+
+////////////////////////////////// Loans //////////////////////////////////
+export type Loan = {
+    id: string
+    loan_code: string,
+    reader_id: string,
+    book_id: string,
+    loan_date: string,
+    return_date: string,
+    status: string,
+}
+
+export interface LoanFormProps {
+    reader: string,
+    book: string,
+    loanDate: string,
+    returnDate: string,
+    setReader: (value: string) => void;
+    setBook: (value: string) => void;
+    setLoanDate: (value: string) => void;
+    setReturnDate: (value: string) => void;
+    readers: Reader[],
+    books: Book[],
+}
+
+export type LoanIndexProps = {
+    loans: Loan[],
+    readers: Reader[],
+    books: Book[],
+}

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Book;
+use Illuminate\Database\Eloquent\Collection;
 
 class Reader extends Model
 {
@@ -23,5 +24,20 @@ class Reader extends Model
     public function books()
     {
         return $this->belongsToMany(Book::class);
+    }
+
+    public static function getReaderNameByID(string $readerID): string
+    {
+        return self::where('id', $readerID)->value('name');
+    }
+
+    public static function getReaderPhoneByID(string $readerID): string
+    {
+        return self::where('id', $readerID)->value('phone');
+    }
+
+    public static function getReaderNameAndIdOrderedByName(): Collection
+    {
+        return self::select('id', 'name')->orderBy('name', 'asc')->get();
     }
 }
