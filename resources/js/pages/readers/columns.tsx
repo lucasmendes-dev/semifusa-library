@@ -97,7 +97,7 @@ export const columns: ColumnDef<Reader>[] = [
                         open={isDialogOpen}
                         setOpen={setIsDialogOpen}
                     />
-                    <AlertDialogDelete objectName={reader} deleteRoute="readers"/>
+                    <AlertDialogDelete id={reader.id} objectName={reader.name} deleteRoute="readers"/>
                 </div>
             );
         },

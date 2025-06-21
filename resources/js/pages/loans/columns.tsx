@@ -4,12 +4,16 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { AlertDialogDelete } from "@/components/AlertDialogDelete";
-//import { UpdateDialog } from "./UpdateDialog";
+import { UpdateDialog } from "./UpdateDialog";
 import { useState } from "react";
 import { formatPhoneNumber } from "@/utils/functions";
-import { Loan, Reader } from "@/types";
+import { Loan, Reader, Book } from "@/types";
+import { ReturnBook } from "./ReturnBook";
 
-export const getLoanColumns = (readers: Reader[]): ColumnDef<Loan>[] => {
+export const getLoanColumns = (
+    readers: Reader[],
+    books: Book[],
+): ColumnDef<Loan>[] => {
     return [
         {
             accessorKey: "loan_code",
@@ -149,16 +153,28 @@ export const getLoanColumns = (readers: Reader[]): ColumnDef<Loan>[] => {
             header: "Ações",
             id: "actions",
             cell: ({ row }) => {
-                const reader = row.original;
+                const loan = row.original;
                 const [isDialogOpen, setIsDialogOpen] = useState(false);
+                const [returnOpen, setReturnOpen] = useState(false);
                 return (
                     <div>
-                        {/* <UpdateDialog
-                            reader={reader}
+                        <UpdateDialog
+                            loan={loan}
                             open={isDialogOpen}
                             setOpen={setIsDialogOpen}
+                            readers={readers}
+                            books={books}
                         />
-                        <AlertDialogDelete objectName={reader} deleteRoute="readers"/> */}
+                        <AlertDialogDelete
+                            id={loan.id}
+                            objectName={loan.loan_code}
+                            deleteRoute="loans"
+                        />
+                        <ReturnBook
+                            loan={loan}
+                            open={returnOpen}
+                            setOpen={setReturnOpen}
+                        />
                     </div>
                 );
             },

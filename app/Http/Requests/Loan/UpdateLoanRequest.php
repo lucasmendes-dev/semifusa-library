@@ -22,8 +22,8 @@ class UpdateLoanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reader_id' => ['required', 'string'],
-            'book_id' => ['required', 'string'],
+            'reader_id' => ['required', 'numeric'],
+            'book_id' => ['required', 'numeric'],
             'loan_date' => ['required', 'string'],
             'return_date' => ['required', 'string'],
         ];

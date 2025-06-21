@@ -139,6 +139,7 @@ export type Loan = {
     loan_date: string,
     return_date: string,
     status: string,
+    book: string,
 }
 
 export interface LoanFormProps {
@@ -155,7 +156,31 @@ export interface LoanFormProps {
 }
 
 export type LoanIndexProps = {
-    loans: Loan[],
+    activeLoans: Loan[],
+    finishedLoans: Loan[],
     readers: Reader[],
     books: Book[],
+    availableBooks: number,
+    loanedBooks: number,
+    lateBooks: number,
+}
+
+export interface UpdateLoanDialogProps {
+    loan: Loan;
+    open: boolean;
+    setOpen: (value: boolean) => void;
+    readers: Reader[],
+    books: Book[],
+}
+
+export type HeadeBoxesProps = {
+    availableBooks: number,
+    loanedBooks: number,
+    lateBooks: number
+}
+
+export type ReturnBookProps = {
+    loan: Loan,
+    open: boolean;
+    setOpen: (value: boolean) => void;
 }

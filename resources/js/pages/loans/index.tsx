@@ -1,10 +1,15 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, LoanIndexProps } from '@/types';
 import { Head } from '@inertiajs/react';
 import { DataTable } from '@/components/data-table';
 import { LoanCreateDialog } from './LoanCreateDialog';
 import { getLoanColumns } from './columns';
+import { HeadBoxes } from './HeadBoxes';
+import { Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger
+} from "@/components/ui/tabs";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,35 +25,50 @@ const filters: string[] = [
 ];
 
 export default function Loans({
-    loans,
+    activeLoans,
+    finishedLoans,
     readers,
     books,
+    availableBooks,
+    loanedBooks,
+    lateBooks,
 }: LoanIndexProps) {
-    const loanColumns = getLoanColumns(readers);
+    const loanColumns = getLoanColumns(readers, books);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Empréstimos" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                </div>
-
+                <HeadBoxes
+                    availableBooks={availableBooks}
+                    loanedBooks={loanedBooks}
+                    lateBooks={lateBooks}
+                />
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <DataTable
-                        columns={loanColumns}
-                        data={loans}
-                        createButton={<LoanCreateDialog readers={readers} books={books}/>}
-                        filters={filters}
-                    />    
+                    <Tabs defaultValue="active_loans" className="mx-auto mt-3 px-3">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="active_loans" className="cursor-pointer hover:bg-[#0A0A0A]">Empréstimos Ativos</TabsTrigger>
+                            <TabsTrigger value="finished_loans" className="cursor-pointer hover:bg-[#0A0A0A]">Empréstimos Finalizados</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="active_loans">
+                        <DataTable
+                            columns={loanColumns}
+                            data={activeLoans}
+                            createButton={<LoanCreateDialog readers={readers} books={books}/>}
+                            filters={filters}
+                        />   
+                        </TabsContent>
+
+                        <TabsContent value="finished_loans">
+                            <DataTable
+                                columns={loanColumns}
+                                data={finishedLoans}
+                                createButton={<LoanCreateDialog readers={readers} books={books}/>}
+                                filters={filters}
+                            />
+                        </TabsContent>
+                    </Tabs> 
                 </div>
             </div>
         </AppLayout>

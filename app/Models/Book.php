@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reader;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Book extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'subtitle',
@@ -31,6 +34,17 @@ class Book extends Model
 
     public static function getBookTitleAndIdOrderedByTitle(): Collection
     {
-        return self::select('id', 'title')->orderBy('title', 'asc')->get();
+        return self::select('id', 'title')->where('status', 'available')->orderBy('title', 'asc')->get();
+    }
+
+    
+    public static function getAvailableBooksNumber(): int
+    {
+        return Book::where('status', 'available')->count();
+    }
+
+    public static function getLoanedBooksNumber(): int
+    {
+        return Book::where('status', 'loaned')->count();
     }
 }

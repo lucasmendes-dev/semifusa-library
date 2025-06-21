@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { AlertDialogDelete } from "@/components/AlertDialogDelete";
 import { UpdateDialog } from "./UpdateDialog";
@@ -105,7 +104,7 @@ export const columns: ColumnDef<Book>[] = [
                         open={isDialogOpen}
                         setOpen={setIsDialogOpen}
                     />
-                    <AlertDialogDelete objectName={book} deleteRoute="books"/>
+                    <AlertDialogDelete id={book.id} objectName={book.title} deleteRoute="books"/>
                 </div>
             );
         },

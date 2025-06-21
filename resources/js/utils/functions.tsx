@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 export function formatPhoneNumber(value: string): string {
     if (!value) {
         return "";

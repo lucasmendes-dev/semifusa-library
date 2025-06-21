@@ -51,7 +51,7 @@ export function LoanForm({
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                     <Label htmlFor="customer" className="block mb-2">Leitor <span className="text-red-400">*</span></Label>
                     <Select
-                    value={reader}
+                        value={String(reader)}
                         onValueChange={(value) => setReader(value)}
                     >
                         <SelectTrigger >
@@ -73,7 +73,7 @@ export function LoanForm({
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                     <Label htmlFor="customer" className="block mb-2">Livro <span className="text-red-400">*</span></Label>
                     <Select
-                        value={book}
+                        value={String(book)}
                         onValueChange={(value) => setBook(value)}
                     >
                         <SelectTrigger >

@@ -22,10 +22,15 @@ const handleDelete = (id: string, deleteRoute: string) => {
 }
 
 export function AlertDialogDelete({
-    objectName, deleteRoute
+    id,
+    objectName,
+    deleteRoute
 }: {
-    objectName: any, deleteRoute: string
+    id: string
+    objectName: string,
+    deleteRoute: string
 }) {
+
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild >
@@ -38,12 +43,12 @@ export function AlertDialogDelete({
                 <AlertDialogHeader>
                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        Esta ação não pode ser desfeita. Isso excluirá permanentemente o registro <strong className="text-red-400">"{objectName.name}</strong>".
+                        Esta ação não pode ser desfeita. Isso excluirá permanentemente o registro <strong className="text-red-400">"{objectName}</strong>".
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel className="cursor-pointer">Cancelar</AlertDialogCancel>
-                    <AlertDialogAction className="bg-red-400 cursor-pointer" onClick={() => handleDelete(objectName.id, deleteRoute)}>Deletar</AlertDialogAction>
+                    <AlertDialogAction className="bg-red-400 cursor-pointer" onClick={() => handleDelete(id, deleteRoute)}>Deletar</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

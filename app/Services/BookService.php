@@ -12,4 +12,9 @@ class BookService
     {
         return Book::findOrFail($bookID);
     }
+
+    public function updateBookStatus(string $id): void
+    {
+        Book::where('id', $id)->update(['status' => 'loaned']);
+    }
 }

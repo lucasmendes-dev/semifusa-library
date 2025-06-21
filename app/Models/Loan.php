@@ -26,4 +26,9 @@ class Loan extends Model
     {
         return $this->belongsTo(Reader::class);
     }
+
+    public static function getLateLoansNumber(): int
+    {
+        return Loan::where('status', 'late')->count();
+    }
 }

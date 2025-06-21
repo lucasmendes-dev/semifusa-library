@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/loans/{id}', [LoanController::class, 'destroy'])->name('loans.destroy');
     Route::put('/loans/{id}', [LoanController::class, 'update'])->name('loans.update');
     Route::post('/loans', [LoanController::class, 'store'])->name('loans.store');
+    Route::put('/loans/returnBook/{id}', [LoanController::class, 'returnBook'])->name('loans.returnBook');
 
     // Books
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
