@@ -27,7 +27,7 @@ export function HeadBoxes({
 
             <div className="border-sidebar-border/70 dark:border-sidebar-border overflow-hidden rounded-xl border bg-white dark:bg-neutral-900 p-4 flex flex-col items-center justify-center text-center">
                 <div className="text-lg md:text-xl font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
-                    Devolução Atrasada
+                    Devoluções Atrasadas
                 </div>
                 <div className="text-4xl font-bold text-red-600 dark:text-red-400">
                     {lateBooks}

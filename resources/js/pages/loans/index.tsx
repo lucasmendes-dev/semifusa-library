@@ -21,7 +21,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const filters: string[] = [
     'name',
     'phone',
-    'email',
+    'book',
 ];
 
 export default function Loans({
@@ -33,8 +33,6 @@ export default function Loans({
     loanedBooks,
     lateBooks,
 }: LoanIndexProps) {
-    const loanColumns = getLoanColumns(readers, books);
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Empréstimos" />
@@ -53,7 +51,7 @@ export default function Loans({
 
                         <TabsContent value="active_loans">
                         <DataTable
-                            columns={loanColumns}
+                            columns={getLoanColumns(readers, books, true)}
                             data={activeLoans}
                             createButton={<LoanCreateDialog readers={readers} books={books}/>}
                             filters={filters}
@@ -62,7 +60,7 @@ export default function Loans({
 
                         <TabsContent value="finished_loans">
                             <DataTable
-                                columns={loanColumns}
+                                columns={getLoanColumns(readers, books, false)}
                                 data={finishedLoans}
                                 createButton={<LoanCreateDialog readers={readers} books={books}/>}
                                 filters={filters}

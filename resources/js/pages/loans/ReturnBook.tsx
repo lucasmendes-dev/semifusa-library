@@ -17,6 +17,7 @@ import {
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -53,6 +54,8 @@ export function ReturnBook({
                 <DialogHeader>
                     <DialogTitle>Devolução do livro: <span className="text-purple-400">{ loan.book }</span></DialogTitle>
                 </DialogHeader>
+
+                <DialogDescription>Selecione a data de devolução e confirme que o livro foi devolvido.</DialogDescription>
 
                 <div className="w-full md:w-1/1 px-3 mt-2">
                     <Label htmlFor="purchase_date" className="block mb-2">Data de Devolução <span className="text-red-400">*</span></Label>

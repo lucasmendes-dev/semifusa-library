@@ -13,6 +13,7 @@ import { ReturnBook } from "./ReturnBook";
 export const getLoanColumns = (
     readers: Reader[],
     books: Book[],
+    showReturnButton: boolean,
 ): ColumnDef<Loan>[] => {
     return [
         {
@@ -170,11 +171,13 @@ export const getLoanColumns = (
                             objectName={loan.loan_code}
                             deleteRoute="loans"
                         />
-                        <ReturnBook
-                            loan={loan}
-                            open={returnOpen}
-                            setOpen={setReturnOpen}
-                        />
+                        {showReturnButton && (
+                            <ReturnBook
+                                loan={loan}
+                                open={returnOpen}
+                                setOpen={setReturnOpen}
+                            />
+                        )}
                     </div>
                 );
             },
