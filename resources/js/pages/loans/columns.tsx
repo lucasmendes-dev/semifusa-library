@@ -13,7 +13,7 @@ import { ReturnBook } from "./ReturnBook";
 export const getLoanColumns = (
     readers: Reader[],
     books: Book[],
-    showReturnButton: boolean,
+    activeLoansTab: boolean,
 ): ColumnDef<Loan>[] => {
     return [
         {
@@ -157,6 +157,8 @@ export const getLoanColumns = (
                 const loan = row.original;
                 const [isDialogOpen, setIsDialogOpen] = useState(false);
                 const [returnOpen, setReturnOpen] = useState(false);
+                const bookName: Book = row.getValue('book');
+
                 return (
                     <div>
                         <UpdateDialog
@@ -165,13 +167,15 @@ export const getLoanColumns = (
                             setOpen={setIsDialogOpen}
                             readers={readers}
                             books={books}
+                            bookName={bookName}
+                            activeLoansTab={activeLoansTab}
                         />
                         <AlertDialogDelete
                             id={loan.id}
                             objectName={loan.loan_code}
                             deleteRoute="loans"
                         />
-                        {showReturnButton && (
+                        {activeLoansTab && (
                             <ReturnBook
                                 loan={loan}
                                 open={returnOpen}

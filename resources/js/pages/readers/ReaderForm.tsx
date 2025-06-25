@@ -40,7 +40,9 @@ export function ReaderForm({
 
     useEffect(() => {
         setFormattedPhone(formatPhoneNumber(phone));
-        setformattedCpf(formatCpfNumber(cpf));
+        if (cpf) {
+            setformattedCpf(formatCpfNumber(cpf));
+        }
     }, [phone, cpf]);
 
     const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +96,7 @@ export function ReaderForm({
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                     <Label htmlFor="nationality" className="block mb-2">Nacionalidade </Label>
-                    <Input id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" placeholder="Ex: Brasileiro(a)"/>
+                    <Input id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3"/>
                 </div>
 
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
@@ -126,7 +128,7 @@ export function ReaderForm({
 
                 <div className="w-full md:w-1/3 px-3 mb-4 md:mb-0">
                     <Label htmlFor="age" className="block mb-2">Idade </Label>
-                    <Input id="age" type="number" value={String(age)} onChange={(e) => setAge(Number(e.target.value))} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" placeholder="Ex: 21" />
+                    <Input id="age" type="number" value={String(age)} onChange={(e) => setAge(Number(e.target.value))} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
                 </div>
 
                 <div className="w-full md:w-1/3 px-3 mb-4 md:mb-0">

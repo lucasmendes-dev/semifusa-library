@@ -1,4 +1,5 @@
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { LoanFormProps } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -32,6 +33,8 @@ export function LoanForm({
     setReturnDate,
     readers,
     books,
+    bookName,
+    activeLoansTab,
 }: LoanFormProps) {
     const parsedLoanDate = parseSingleDate(loanDate);
     const parsedReturnDate = parseSingleDate(returnDate);
@@ -72,24 +75,29 @@ export function LoanForm({
 
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
                     <Label htmlFor="customer" className="block mb-2">Livro <span className="text-red-400">*</span></Label>
-                    <Select
-                        value={String(book)}
-                        onValueChange={(value) => setBook(value)}
-                    >
-                        <SelectTrigger >
-                            <SelectValue className="mb-3" placeholder="Selecione um livro" />
-                        </SelectTrigger>
+                    {activeLoansTab
+                    ?
+                        <Input id="name" value={String(bookName)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3 cursor-not-allowed" required readOnly/>
+                    :
+                        <Select
+                            value={String(book)}
+                            onValueChange={(value) => setBook(value)}
+                        >
+                            <SelectTrigger >
+                                <SelectValue className="mb-3" placeholder="Selecione um livro" />
+                            </SelectTrigger>
 
-                        <SelectContent>
-                            <SelectGroup>
-                                {books.map((book) => (
-                                    <SelectItem key={book.id} value={String(book.id)}>
-                                        {book.title}
-                                    </SelectItem>
-                                ))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {books.map((book) => (
+                                        <SelectItem key={book.id} value={String(book.id)}>
+                                            {book.title}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    }
                 </div>
             </div>
 

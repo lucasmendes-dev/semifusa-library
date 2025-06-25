@@ -153,6 +153,8 @@ export interface LoanFormProps {
     setReturnDate: (value: string) => void;
     readers: Reader[],
     books: Book[],
+    bookName: Book,
+    activeLoansTab: boolean,
 }
 
 export type LoanIndexProps = {
@@ -171,6 +173,8 @@ export interface UpdateLoanDialogProps {
     setOpen: (value: boolean) => void;
     readers: Reader[],
     books: Book[],
+    bookName: Book,
+    activeLoansTab: boolean
 }
 
 export type HeadeBoxesProps = {

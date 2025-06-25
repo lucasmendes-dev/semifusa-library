@@ -20,6 +20,8 @@ export function UpdateDialog({
     setOpen,
     readers,
     books,
+    bookName,
+    activeLoansTab,
 }: UpdateLoanDialogProps) {
     const [reader, setReader] = useState(loan.reader_id);
     const [book, setBook] = useState(loan.book_id);
@@ -66,6 +68,8 @@ export function UpdateDialog({
                     setReturnDate={setReturnDate}
                     readers={readers}
                     books={books}
+                    bookName={bookName}
+                    activeLoansTab={activeLoansTab}
                 />
 
                 <DialogFooter>

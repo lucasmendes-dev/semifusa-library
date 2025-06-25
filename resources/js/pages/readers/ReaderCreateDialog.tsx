@@ -27,7 +27,7 @@ export function ReaderCreateDialog() {
 
 
     const handleCreate = () => {
-        if (!name || !phone || !email) {
+        if (!name || !phone || !email || !maritalStatus || !gender || !address) {
             alert("Os campos com * são obrigatórios.");
             return;
         }
