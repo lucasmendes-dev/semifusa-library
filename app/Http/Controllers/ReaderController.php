@@ -20,7 +20,8 @@ class ReaderController extends Controller
 
     public function store(StoreReaderRequest $request)
     {
-        Reader::create($request->validated());
+        $data = $this->readerService->handleData($request->validated());
+        Reader::create($data);
 
         return redirect()->back()->with('success', 'Leitor(a) "' . $request->name . '" cadastrado(a)!');
     }

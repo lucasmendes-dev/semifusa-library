@@ -25,12 +25,16 @@ export function UpdateDialog({
     const [maritalStatus, setMaritalStatus] = useState(reader.marital_status);
     const [cpf, setCpf] = useState(reader.cpf);
     const [nationality, setNationality] = useState(reader.nationality);
-    const [age, setAge] = useState<number|null>(reader.age);
+    const [birthDate, setBirthDate] = useState(reader.birth_date);
     const [gender, setGender] = useState(reader.gender);
     const [profession, setProfession] = useState(reader.profession);
     const [address, setAddress] = useState(reader.address);
 
     const handleUpdate = () => {
+        if (!name || !phone || !email || !birthDate || !gender || !address) {
+            alert("Os campos com * são obrigatórios.");
+            return;
+        }
         router.put(`/readers/${reader.id}`, {
             name,
             phone,
@@ -38,7 +42,7 @@ export function UpdateDialog({
             marital_status: maritalStatus,
             cpf: cpf,
             nationality,
-            age,
+            birth_date: birthDate,
             gender,
             profession,
             address,
@@ -72,7 +76,7 @@ export function UpdateDialog({
                     maritalStatus={maritalStatus}
                     cpf={cpf}
                     nationality={nationality}
-                    age={age}
+                    birthDate={birthDate}
                     gender={gender}
                     profession={profession}
                     address={address}
@@ -82,7 +86,7 @@ export function UpdateDialog({
                     setMaritalStatus={setMaritalStatus}
                     setCpf={setCpf}
                     setNationality={setNationality}
-                    setAge={setAge}
+                    setBirthDate={setBirthDate}
                     setGender={setGender}
                     setProfession={setProfession}
                     setAddress={setAddress}

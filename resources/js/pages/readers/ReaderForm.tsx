@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
-import { formatPhoneNumber, formatCpfNumber } from "@/utils/functions";
+import { formatPhoneNumber, formatCpfNumber, formatBirthDate } from "@/utils/functions";
 import { ReaderFormProps } from "@/types";
 import {
     Select,
@@ -20,7 +20,7 @@ export function ReaderForm({
     maritalStatus,
     cpf,
     nationality,
-    age,
+    birthDate,
     gender,
     profession,
     address,
@@ -30,20 +30,22 @@ export function ReaderForm({
     setMaritalStatus,
     setCpf,
     setNationality,
-    setAge,
+    setBirthDate,
     setGender,
     setProfession,
     setAddress,
 }: ReaderFormProps) {
     const [formattedPhone, setFormattedPhone] = useState('');
-    const [formattedCpf, setformattedCpf] = useState('');
+    const [formattedCpf, setFormattedCpf] = useState('');
+    const [formattedBirthDate, setFormattedBirthDate] = useState('');
 
     useEffect(() => {
         setFormattedPhone(formatPhoneNumber(phone));
+        setFormattedBirthDate(formatBirthDate(birthDate));
         if (cpf) {
-            setformattedCpf(formatCpfNumber(cpf));
+            setFormattedCpf(formatCpfNumber(cpf));
         }
-    }, [phone, cpf]);
+    }, [phone, cpf, birthDate]);
 
     const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = event.target.value;
@@ -55,8 +57,15 @@ export function ReaderForm({
     const handleCpfFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = event.target.value;
         const formattedValue = formatCpfNumber(rawValue);
-        setformattedCpf(formattedValue);
+        setFormattedCpf(formattedValue);
         setCpf(rawValue);
+    }
+
+    const handleBirthDateFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = event.target.value;
+        const formattedValue = formatBirthDate(rawValue);
+        setFormattedBirthDate(formattedValue);
+        setBirthDate(formattedValue);
     }
 
     return (
@@ -88,15 +97,15 @@ export function ReaderForm({
                 </div>
 
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-                    <Label htmlFor="cpf" className="block mb-2">CPF - (somente números)</Label>
-                    <Input id="cpf" value={formattedCpf} onChange={handleCpfFormat} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
+                    <Label htmlFor="birthDate" className="block mb-2">Data de Nascimento <span className="text-red-400">*</span></Label>
+                    <Input id="birthDate" value={formattedBirthDate} onChange={handleBirthDateFormat} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" placeholder="dd/mm/aaaa" required/>
                 </div>
             </div>
 
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-                    <Label htmlFor="nationality" className="block mb-2">Nacionalidade </Label>
-                    <Input id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3"/>
+                    <Label htmlFor="cpf" className="block mb-2">CPF - (somente números)</Label>
+                    <Input id="cpf" value={formattedCpf} onChange={handleCpfFormat} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
                 </div>
 
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
@@ -107,11 +116,10 @@ export function ReaderForm({
 
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full md:w-1/3 px-3 mb-4 md:mb-0">
-                    <Label htmlFor="maritalStatus" className="block mb-2">Estado Civil <span className="text-red-400">*</span></Label>
+                    <Label htmlFor="maritalStatus" className="block mb-2">Estado Civil</Label>
                     <Select
                         value={maritalStatus}
                         onValueChange={(value) => setMaritalStatus(value)}
-                        required
                     >
                         <SelectTrigger>
                             <SelectValue placeholder="Selecione" />
@@ -121,14 +129,16 @@ export function ReaderForm({
                             <SelectGroup>
                                 <SelectItem value="single">Solteiro(a)</SelectItem>
                                 <SelectItem value="married">Casado(a)</SelectItem>
+                                <SelectItem value="divorced">Divorciado(a)</SelectItem>
+                                <SelectItem value="widow">Viúvo(a)</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
                 </div>
 
                 <div className="w-full md:w-1/3 px-3 mb-4 md:mb-0">
-                    <Label htmlFor="age" className="block mb-2">Idade </Label>
-                    <Input id="age" type="number" value={String(age)} onChange={(e) => setAge(Number(e.target.value))} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
+                    <Label htmlFor="nationality" className="block mb-2">Nacionalidade </Label>
+                    <Input id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3"/>
                 </div>
 
                 <div className="w-full md:w-1/3 px-3 mb-4 md:mb-0">

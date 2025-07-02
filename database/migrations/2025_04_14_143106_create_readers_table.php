@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->enum('marital_status', ['single', 'married']);
+            $table->enum('marital_status', ['single', 'married', 'divorced', 'widow'])->nullable();
             $table->string('cpf')->nullable();
             $table->string('nationality')->nullable();
-            $table->integer('age')->nullable();
+            $table->date('birth_date');
             $table->enum('gender', ['M', 'F', 'O', 'N']);
             $table->string('profession')->nullable();
             $table->text('address');

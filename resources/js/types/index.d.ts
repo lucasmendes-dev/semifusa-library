@@ -51,7 +51,7 @@ export type Reader = {
     marital_status: string,
     cpf: string,
     nationality: string,
-    age: number,
+    birth_date: string,
     gender: string,
     profession: string,
     address: string,
@@ -64,7 +64,7 @@ export interface ReaderFormProps {
     maritalStatus: string,
     cpf: string,
     nationality: string,
-    age: number|null,
+    birthDate: string
     gender: string,
     profession: string,
     address: string,
@@ -74,7 +74,7 @@ export interface ReaderFormProps {
     setMaritalStatus: (value: string) => void;
     setCpf: (value: string) => void;
     setNationality: (value: string) => void;
-    setAge: (value: number|null) => void;
+    setBirthDate: (value: string) => void;
     setGender: (value: string) => void;
     setProfession: (value: string) => void;
     setAddress: (value: string) => void;

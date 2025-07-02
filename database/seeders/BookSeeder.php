@@ -13,6 +13,6 @@ class BookSeeder extends Seeder
     public function run(): void
     {
         // php artisan make:seeder BookSeeder
-        Book::factory(50)->create();
+        Book::factory(25)->create();
     }
 }

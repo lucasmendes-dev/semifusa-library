@@ -25,7 +25,7 @@ class BookFactory extends Factory
             'inventory_number' => $this->faker->unique()->numberBetween(1000, 9999),
             'edition' => $this->faker->optional()->randomElement(['1ª edição', '2ª edição', '3ª edição']),
             'type' => $this->faker->randomElement(['main_library', 'comics', 'geloteca']),
-            'status' => $this->faker->randomElement(['available', 'unavailable', 'loaned']),
+            'status' => $this->faker->randomElement(['available']),
         ];
     }
 }

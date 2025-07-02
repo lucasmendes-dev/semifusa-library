@@ -20,14 +20,14 @@ export function ReaderCreateDialog() {
     const [maritalStatus, setMaritalStatus] = useState("");
     const [cpf, setCpf] = useState("");
     const [nationality, setNationality] = useState("");
-    const [age, setAge] = useState<number|null>(null);
+    const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
     const [profession, setProfession] = useState("");
     const [address, setAddress] = useState("");
 
 
     const handleCreate = () => {
-        if (!name || !phone || !email || !maritalStatus || !gender || !address) {
+        if (!name || !phone || !email || !birthDate || !gender || !address) {
             alert("Os campos com * são obrigatórios.");
             return;
         }
@@ -38,7 +38,7 @@ export function ReaderCreateDialog() {
             marital_status: maritalStatus,
             cpf: cpf,
             nationality,
-            age,
+            birth_date: birthDate,
             gender,
             profession,
             address,
@@ -68,7 +68,7 @@ export function ReaderCreateDialog() {
                     maritalStatus={maritalStatus}
                     cpf={cpf}
                     nationality={nationality}
-                    age={age}
+                    birthDate={birthDate}
                     gender={gender}
                     profession={profession}
                     address={address}
@@ -78,7 +78,7 @@ export function ReaderCreateDialog() {
                     setMaritalStatus={setMaritalStatus}
                     setCpf={setCpf}
                     setNationality={setNationality}
-                    setAge={setAge}
+                    setBirthDate={setBirthDate}
                     setGender={setGender}
                     setProfession={setProfession}
                     setAddress={setAddress}
