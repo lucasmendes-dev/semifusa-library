@@ -69,7 +69,7 @@ export interface ReaderFormProps {
     birthDate: string
     gender: string,
     profession: string,
-    address: string,
+    address: Address | null,
     setName: (value: string) => void;
     setPhone: (value: string) => void;
     setEmail: (value: string) => void;
@@ -80,7 +80,7 @@ export interface ReaderFormProps {
     setBirthDate: (value: string) => void;
     setGender: (value: string) => void;
     setProfession: (value: string) => void;
-    setAddress: (value: string) => void;
+    setAddress: React.Dispatch<React.SetStateAction<Address>>;
 }
 
 export interface UpdateReaderDialogProps {
@@ -190,4 +190,33 @@ export type ReturnBookProps = {
     loan: Loan,
     open: boolean;
     setOpen: (value: boolean) => void;
+}
+
+////////////////////////////////// Address //////////////////////////////////
+export type Address = {
+    id: string,
+    cep: string,
+    logradouro: string,
+    numero: string,
+    complemento: string,
+    bairro: string,
+    localidade: string,
+    estado: string,
+}
+
+export interface AdressFormProps {
+    cep: string,
+    logradouro: string,
+    numero: string,
+    complemento: string,
+    bairro: string,
+    localidade: string,
+    estado: string,
+    setCep: (value: string) => void;
+    setLogradouro: (value: string) => void;
+    setNumero: (value: string) => void;
+    setComplemento: (value: string) => void;
+    setBairro: (value: string) => void;
+    setLocalidade: (value: string) => void;
+    setEstado: (value: string) => void;
 }

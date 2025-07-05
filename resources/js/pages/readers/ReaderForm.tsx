@@ -1,10 +1,9 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
-import { formatPhoneNumber, formatCpfNumber, formatRgNumber, formatBirthDate, formatDateToDisplay } from "@/utils/functions";
 import { ReaderFormProps } from "@/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { AddressForm } from "./addressForm";
 import {
     Select,
     SelectContent,
@@ -13,6 +12,13 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
+import {
+    formatPhoneNumber,
+    formatCpfNumber,
+    formatRgNumber,
+    formatBirthDate,
+    formatDateToDisplay,
+} from "@/utils/functions";
 
 export function ReaderForm({
     name,
@@ -43,7 +49,7 @@ export function ReaderForm({
     const [formattedRg, setFormattedRg] = useState('');
     const [formattedBirthDate, setFormattedBirthDate] = useState('');
 
-    let type: string = cpf ? 'cpf' : 'rg';
+    const type: string = cpf ? 'cpf' : 'rg';
     const [docType, setDocType] = useState(type);
 
     useEffect(() => {
@@ -213,18 +219,11 @@ export function ReaderForm({
                     </Select>
                 </div>
             </div>
-
-            <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full md:w-full px-3 mb-4 md:mb-0">
-                    <Label htmlFor="description" className="block mb-2">Endereço <span className="text-red-400">*</span></Label>
-                    <Textarea
-                        className="col-span-3"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        required
-                    />
-                </div>
-            </div>
+            
+            <AddressForm 
+                address={address}
+                setAddress={setAddress}
+            />
 
             <p className="text-sm text-gray-600 flex justify-end">
                 <span className="text-red-400">*</span> campo obrigatório

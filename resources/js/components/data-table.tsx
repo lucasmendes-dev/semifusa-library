@@ -50,10 +50,9 @@ export function DataTable<TData, TValue>({ columns, data, createButton, filters 
         globalFilterFn: (row, columnId, filterValue) => {
             return filters?.some((filterKey) => {
                 const cellValue = row.getValue(filterKey);
-                return (
-                    typeof cellValue === 'string' &&
-                    cellValue?.toLowerCase().includes(filterValue.toLowerCase())
-                );
+                return String(cellValue ?? '')
+                .toLowerCase()
+                .includes(filterValue.toLowerCase());
             });
         },
         state: {

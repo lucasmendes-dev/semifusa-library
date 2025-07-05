@@ -63,7 +63,9 @@ export function LoanForm({
 
                         <SelectContent>
                             <SelectGroup>
-                                {readers.map((reader) => (
+                                {!readers.length ? <p className="text-sm ml-3">Nenhum Leitor Castrado</p>
+                                :
+                                readers.map((reader) => (
                                     <SelectItem key={reader.id} value={String(reader.id)}>
                                         {reader.name}
                                     </SelectItem>
@@ -89,7 +91,9 @@ export function LoanForm({
 
                             <SelectContent>
                                 <SelectGroup>
-                                    {books.map((book) => (
+                                    {!books.length ? <p className="text-sm ml-3">Nenhum Livro Castrado</p>
+                                    :
+                                    books.map((book) => (
                                         <SelectItem key={book.id} value={String(book.id)}>
                                             {book.title} ({book.inventory_number})
                                         </SelectItem>

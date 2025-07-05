@@ -32,7 +32,7 @@ class UpdateReaderRequest extends FormRequest
             'birth_date' => ['required', 'string'],
             'gender' => ['required', 'string'],
             'profession' => ['nullable', 'string'],
-            'address' => ['required', 'string'],
+            'address' => ['required', 'array'],
         ];
     }
 }

@@ -27,7 +27,14 @@ class BookController extends Controller
 
     public function store(StoreBookRequest $request)
     {
-        Book::create($request->validated());
+        $data = $request->validated();
+
+        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number']);
+        if ($inventNumberAlreadyExists) {
+            return redirect()->back()->with('error', 'O número de inventário "' . $data['inventory_number'] . '" já existe!');
+        }
+
+        Book::create($data);
 
         return redirect()->back()->with('success', 'Livro "' . $request->title . '" cadastrado(a)!');
     }
@@ -36,6 +43,11 @@ class BookController extends Controller
     {
         $book = $this->bookService->getBookByID($id);
         $data = $request->validated();
+
+        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number']);
+        if ($inventNumberAlreadyExists) {
+            return redirect()->back()->with('error', 'O número de inventário "' . $data['inventory_number'] . '" já existe!');
+        }
 
         $book->update($data);
 

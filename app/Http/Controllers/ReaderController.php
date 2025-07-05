@@ -14,13 +14,13 @@ class ReaderController extends Controller
 
     public function index()
     {
-        $readers = Reader::orderBy('name', 'asc')->get();
+        $readers = $this->readerService->getReadersData();
         return Inertia::render('readers/index', ['readers' => $readers]);
     }
 
     public function store(StoreReaderRequest $request)
     {
-        $data = $this->readerService->handleData($request->validated());
+        $data = $this->readerService->handleCreateData($request->validated());
         Reader::create($data);
 
         return redirect()->back()->with('success', 'Leitor(a) "' . $request->name . '" cadastrado(a)!');
@@ -29,7 +29,7 @@ class ReaderController extends Controller
     public function update(UpdateReaderRequest $request, string $id)
     {
         $reader = $this->readerService->getReaderByID($id);
-        $data = $this->readerService->handleData($request->validated());
+        $data = $this->readerService->handleUpdateData($request->validated());
 
         $reader->update($data);
 

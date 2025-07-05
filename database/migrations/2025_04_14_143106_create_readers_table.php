@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->enum('gender', ['M', 'F', 'O', 'N']);
             $table->string('profession')->nullable();
-            $table->text('address');
+            $table->foreignId('address_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

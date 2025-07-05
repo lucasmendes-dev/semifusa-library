@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +28,7 @@ class ReaderFactory extends Factory
             'birth_date' => $this->faker->date('Y-m-d'),
             'gender' => $this->faker->randomElement(['M', 'F', 'O', 'N']),
             'profession' => $this->faker->jobTitle(),
-            'address' => $this->faker->address(),
+            'address_id' => Address::factory(),
         ];
     }
 }

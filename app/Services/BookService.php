@@ -17,4 +17,9 @@ class BookService
     {
         Book::where('id', $id)->update(['status' => 'loaned']);
     }
+
+    public function doesInventoryNumberAlreadyExists(string $inventoryNumber): bool
+    {
+        return Book::where('inventory_number', $inventoryNumber)->exists();
+    }
 }

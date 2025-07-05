@@ -22,7 +22,7 @@ class Reader extends Model
         'birth_date',
         'gender',
         'profession',
-        'address',
+        'address_id',
     ];
 
     public function books()

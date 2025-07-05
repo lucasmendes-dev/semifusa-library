@@ -11,6 +11,7 @@ import {
     DialogFooter,
     DialogDescription
 } from "@/components/ui/dialog";
+import { Address } from "@/types";
 
 export function ReaderCreateDialog() {
     const [open, setOpen] = useState(false);
@@ -24,11 +25,20 @@ export function ReaderCreateDialog() {
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
     const [profession, setProfession] = useState("");
-    const [address, setAddress] = useState("");
-
+    const [address, setAddress] = useState<Address>({
+        id: '',
+        cep: '',
+        logradouro: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        localidade: '',
+        estado: '',
+    });
 
     const handleCreate = () => {
-        if (!name || !phone || !email || !birthDate || !gender || !address) {
+        if (!name || !phone || !email || !birthDate || !gender || 
+            (!address.logradouro || !address.bairro || !address.localidade || !address.estado)) {
             alert("Os campos com * são obrigatórios.");
             return;
         }
