@@ -91,7 +91,7 @@ export function LoanForm({
                                 <SelectGroup>
                                     {books.map((book) => (
                                         <SelectItem key={book.id} value={String(book.id)}>
-                                            {book.title}
+                                            {book.title} ({book.inventory_number})
                                         </SelectItem>
                                     ))}
                                 </SelectGroup>

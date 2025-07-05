@@ -22,6 +22,7 @@ class ReaderFactory extends Factory
             'email' => $this->faker->email(),
             'marital_status' => $this->faker->randomElement(['single', 'married', 'divorced', 'widow']),
             'cpf' => $this->faker->numerify('###.###.###=##'),
+            'rg' => $this->faker->numerify('##.###.###'),
             'nationality' => $this->faker->country(),
             'birth_date' => $this->faker->date('Y-m-d'),
             'gender' => $this->faker->randomElement(['M', 'F', 'O', 'N']),

@@ -39,6 +39,20 @@ export function formatCpfNumber(cpfString: string): string {
     return formattedValue;
 }
 
+export function formatRgNumber(rgString: string): string {
+    const digits = rgString.replace(/\D/g, '').slice(0, 9);
+    if (digits.length <= 2) {
+      return digits;
+    }
+    if (digits.length <= 5) {
+      return `${digits.slice(0, 2)}.${digits.slice(2)}`;
+    }
+    if (digits.length <= 8) {
+      return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5)}`;
+    }
+    return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5, 8)}-${digits.slice(8)}`;
+}
+
 export function formatToBRCurrency(price: number) {
     return new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -81,4 +95,16 @@ export function formatBirthDate(value: string): string {
     if (year)   formatted += `/${year}`;
 
     return formatted;
+}
+
+export function formatDateToDisplay(date: string | null | undefined): string {
+    if (!date) {
+        return '';
+    }
+
+    const parts = date.split('-');
+    if (parts.length === 3) {
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+    return date;
 }

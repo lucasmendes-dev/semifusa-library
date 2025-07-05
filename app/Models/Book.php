@@ -34,7 +34,7 @@ class Book extends Model
 
     public static function getBookTitleAndIdOrderedByTitle(): Collection
     {
-        return self::select('id', 'title')->where('status', 'available')->orderBy('title', 'asc')->get();
+        return self::select('id', 'title', 'inventory_number')->where('status', 'available')->orderBy('title', 'asc')->get();
     }
 
     

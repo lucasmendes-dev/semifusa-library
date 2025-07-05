@@ -14,7 +14,7 @@ class ReaderController extends Controller
 
     public function index()
     {
-        $readers = Reader::all();
+        $readers = Reader::orderBy('name', 'asc')->get();
         return Inertia::render('readers/index', ['readers' => $readers]);
     }
 

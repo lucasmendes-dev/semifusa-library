@@ -27,6 +27,7 @@ class UpdateReaderRequest extends FormRequest
             'email' => ['required', 'string'],
             'marital_status' => ['nullable', 'string'],
             'cpf' => ['nullable', 'string'],
+            'rg' => ['nullable', 'string'],
             'nationality' => ['nullable', 'string'],
             'birth_date' => ['required', 'string'],
             'gender' => ['required', 'string'],

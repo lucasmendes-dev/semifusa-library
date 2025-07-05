@@ -19,6 +19,7 @@ export function ReaderCreateDialog() {
     const [email, setEmail] = useState("");
     const [maritalStatus, setMaritalStatus] = useState("");
     const [cpf, setCpf] = useState("");
+    const [rg, setRg] = useState("");
     const [nationality, setNationality] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
@@ -36,7 +37,8 @@ export function ReaderCreateDialog() {
             phone,
             email,
             marital_status: maritalStatus,
-            cpf: cpf,
+            cpf,
+            rg,
             nationality,
             birth_date: birthDate,
             gender,
@@ -67,6 +69,7 @@ export function ReaderCreateDialog() {
                     email={email}
                     maritalStatus={maritalStatus}
                     cpf={cpf}
+                    rg={rg}
                     nationality={nationality}
                     birthDate={birthDate}
                     gender={gender}
@@ -77,6 +80,7 @@ export function ReaderCreateDialog() {
                     setEmail={setEmail}
                     setMaritalStatus={setMaritalStatus}
                     setCpf={setCpf}
+                    setRg={setRg}
                     setNationality={setNationality}
                     setBirthDate={setBirthDate}
                     setGender={setGender}

@@ -2,8 +2,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
-import { formatPhoneNumber, formatCpfNumber, formatBirthDate } from "@/utils/functions";
+import { formatPhoneNumber, formatCpfNumber, formatRgNumber, formatBirthDate, formatDateToDisplay } from "@/utils/functions";
 import { ReaderFormProps } from "@/types";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
     Select,
     SelectContent,
@@ -19,6 +20,7 @@ export function ReaderForm({
     email,
     maritalStatus,
     cpf,
+    rg,
     nationality,
     birthDate,
     gender,
@@ -29,6 +31,7 @@ export function ReaderForm({
     setEmail,
     setMaritalStatus,
     setCpf,
+    setRg,
     setNationality,
     setBirthDate,
     setGender,
@@ -37,15 +40,23 @@ export function ReaderForm({
 }: ReaderFormProps) {
     const [formattedPhone, setFormattedPhone] = useState('');
     const [formattedCpf, setFormattedCpf] = useState('');
+    const [formattedRg, setFormattedRg] = useState('');
     const [formattedBirthDate, setFormattedBirthDate] = useState('');
 
+    let type: string = cpf ? 'cpf' : 'rg';
+    const [docType, setDocType] = useState(type);
+
     useEffect(() => {
+        const dateFormatted = formatDateToDisplay(birthDate);
+        setFormattedBirthDate(dateFormatted);
         setFormattedPhone(formatPhoneNumber(phone));
-        setFormattedBirthDate(formatBirthDate(birthDate));
         if (cpf) {
             setFormattedCpf(formatCpfNumber(cpf));
         }
-    }, [phone, cpf, birthDate]);
+        if (rg) {
+            setFormattedRg(formatRgNumber(rg));
+        }
+    }, [phone, cpf, rg, birthDate]);
 
     const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = event.target.value;
@@ -61,10 +72,16 @@ export function ReaderForm({
         setCpf(rawValue);
     }
 
+    const handleRgFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = event.target.value;
+        const formattedValue = formatRgNumber(rawValue);
+        setFormattedRg(formattedValue);
+        setRg(rawValue);
+    }
+
     const handleBirthDateFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = event.target.value;
         const formattedValue = formatBirthDate(rawValue);
-        setFormattedBirthDate(formattedValue);
         setBirthDate(formattedValue);
     }
 
@@ -104,11 +121,44 @@ export function ReaderForm({
 
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-                    <Label htmlFor="cpf" className="block mb-2">CPF - (somente números)</Label>
-                    <Input id="cpf" value={formattedCpf} onChange={handleCpfFormat} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
+                    <RadioGroup
+                        value={docType}
+                        onValueChange={setDocType}
+                        className="flex flex-row gap-6 mb-4"
+                    >
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="cpf" id="doc-cpf" />
+                            <Label htmlFor="doc-cpf">CPF</Label>
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="rg" id="doc-rg" />
+                            <Label htmlFor="doc-rg">RG</Label>
+                        </div>
+                    </RadioGroup>
+
+                    {docType === "cpf" && (
+                        <Input
+                        id="cpf"
+                        value={formattedCpf}
+                        onChange={handleCpfFormat}
+                        className="appearance-none block w-full rounded-lg py-3 px-4 mb-3"
+                        placeholder="000.000.000-00"
+                        />
+                    )}
+
+                    {docType === "rg" && (
+                        <Input
+                        id="rg"
+                        value={formattedRg}
+                        onChange={handleRgFormat}
+                        className="w-full rounded-lg py-3 px-4 mb-3"
+                        placeholder="00.000.000"
+                        />
+                    )}
                 </div>
 
-                <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+                <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0 mt-2">
                     <Label htmlFor="profession" className="block mb-2">Profissão</Label>
                     <Input id="profession" value={profession} onChange={(e) => setProfession(e.target.value)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3" />
                 </div>

@@ -14,9 +14,9 @@ class BookController extends Controller
 
     public function index()
     {
-        $mainLibrary = Book::where('type', 'main_library')->get();
-        $comics = Book::where('type', 'comics')->get();
-        $geloteca = Book::where('type', 'geloteca')->get();
+        $mainLibrary = Book::where('type', 'main_library')->orderBy('title', 'asc')->get();
+        $comics = Book::where('type', 'comics')->orderBy('title', 'asc')->get();
+        $geloteca = Book::where('type', 'geloteca')->orderBy('title', 'asc')->get();
 
         return Inertia::render('books/index', [
             'mainLibrary' => $mainLibrary ?? [],

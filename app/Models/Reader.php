@@ -17,6 +17,7 @@ class Reader extends Model
         'email',
         'marital_status',
         'cpf',
+        'rg',
         'nationality',
         'birth_date',
         'gender',

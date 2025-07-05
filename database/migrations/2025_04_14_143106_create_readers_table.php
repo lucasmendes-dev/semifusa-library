@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->enum('marital_status', ['single', 'married', 'divorced', 'widow'])->nullable();
             $table->string('cpf')->nullable();
+            $table->string('rg')->nullable();
             $table->string('nationality')->nullable();
             $table->date('birth_date');
             $table->enum('gender', ['M', 'F', 'O', 'N']);

@@ -24,6 +24,7 @@ export function UpdateDialog({
     const [email, setEmail] = useState(reader.email);
     const [maritalStatus, setMaritalStatus] = useState(reader.marital_status);
     const [cpf, setCpf] = useState(reader.cpf);
+    const [rg, setRg] = useState(reader.rg);
     const [nationality, setNationality] = useState(reader.nationality);
     const [birthDate, setBirthDate] = useState(reader.birth_date);
     const [gender, setGender] = useState(reader.gender);
@@ -75,6 +76,7 @@ export function UpdateDialog({
                     email={email}
                     maritalStatus={maritalStatus}
                     cpf={cpf}
+                    rg={rg}
                     nationality={nationality}
                     birthDate={birthDate}
                     gender={gender}
@@ -85,6 +87,7 @@ export function UpdateDialog({
                     setEmail={setEmail}
                     setMaritalStatus={setMaritalStatus}
                     setCpf={setCpf}
+                    setRg={setRg}
                     setNationality={setNationality}
                     setBirthDate={setBirthDate}
                     setGender={setGender}
