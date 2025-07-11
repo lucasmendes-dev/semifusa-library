@@ -220,3 +220,18 @@ export interface AdressFormProps {
     setLocalidade: (value: string) => void;
     setEstado: (value: string) => void;
 }
+
+////////////////////////////////// Statistics //////////////////////////////////
+export interface StatisticsProps {
+    totalBooks,
+    readers,
+    neighborhood,
+    age,
+    gender,
+    month,
+}
+
+export interface StatisticsHeadboxProps {
+    totalBooks,
+    readers,
+}

@@ -3,9 +3,9 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\ReaderController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -33,6 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/readers/{id}', [ReaderController::class, 'destroy'])->name('readers.destroy');
     Route::put('/readers/{id}', [ReaderController::class, 'update'])->name('readers.update');
     Route::post('/readers', [ReaderController::class, 'store'])->name('readers.store');
+
+    // Statistics
+    Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
 });
 
 require __DIR__.'/settings.php';

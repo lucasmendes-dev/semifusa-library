@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Book;
 use App\Models\Reader;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
@@ -29,6 +31,20 @@ class Loan extends Model
 
     public static function getLateLoansNumber(): int
     {
-        return Loan::where('status', 'late')->count();
+        return self::where('status', 'late')->count();
+    }
+
+    public static function getTotalBooksLoaned(): int
+    {
+        return self::count();
+    }
+
+    public static function getLoanByMonth(): Collection
+    {
+        return self::selectRaw('DATE_FORMAT(loan_date, "%Y-%m") as month, COUNT(*) as total')
+        ->where('loan_date', '>=', Carbon::now()->subMonths(12)->startOfMonth())
+        ->groupBy(self::raw('DATE_FORMAT(loan_date, "%Y-%m")'))
+        ->orderBy('month')
+        ->get();
     }
 }
