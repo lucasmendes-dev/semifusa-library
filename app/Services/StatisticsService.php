@@ -14,7 +14,7 @@ class StatisticsService
         $totalBooks = Loan::getTotalBooksLoaned();
         $readers = Reader::count();
         $neighborhood = $this->getLoanByNeighborhood();
-        $age = Reader::getAgeRange();
+        $age = $this->getLoanByAge();
         $gender = $this->getLoanByGender();
         $month = Loan::getLoanByMonth();
 
@@ -40,6 +40,36 @@ class StatisticsService
             ];
         }
         return $data;
+    }
+
+    private function getLoanByAge()
+    {
+        $ages = Reader::getAgeRange();
+        $defaultAgeRange = [
+            '0 - 9',
+            '10 - 19',
+            '20 - 29',
+            '30 - 39',
+            '40 - 49',
+            '50 - 59',
+            '60 - 69',
+            '70 - 79',
+            '80 - 100'
+        ];
+
+        $agesMap = [];
+        foreach ($ages as $item) {
+            $agesMap[$item['range']] = $item['total'];
+        }
+
+        $finalAges = [];
+        foreach ($defaultAgeRange as $range) {
+            $finalAges[] = [
+                'range' => $range,
+                'total' => $agesMap[$range] ?? 0,
+            ];
+        }
+        return $finalAges;
     }
 
     private function getLoanByGender(): Collection

@@ -36,7 +36,7 @@ export function AgeChart({age} : {age: any}) {
                         accessibilityLayer
                         data={age}
                         margin={{
-                            top: 20,
+                            top: 30,
                         }}
                     >
                         <CartesianGrid vertical={false} />

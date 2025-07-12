@@ -29,6 +29,10 @@ export function UpdateDialog({
     const [status, setStatus] = useState(book.status);
 
     const handleUpdate = () => {
+        if (!title || !author || !type || !status) {
+            alert("Os campos com * são obrigatórios.");
+            return;
+        }
         router.put(`/books/${book.id}`, {
             title,
             subtitle,

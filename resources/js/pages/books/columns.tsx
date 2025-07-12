@@ -44,23 +44,6 @@ export const columns: ColumnDef<Book>[] = [
         }
     },
     {
-        accessorKey: "subtitle",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Sub-Título
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        cell: ({ row }) => {
-            return <div className="ml-3 font-medium">{row.getValue("subtitle")}</div>
-        }
-    },
-    {
         accessorKey: "author",
         header: ({ column }) => {
             return (

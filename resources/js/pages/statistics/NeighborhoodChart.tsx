@@ -18,7 +18,7 @@ export const description = "A bar chart with a custom label";
 
 const chartConfig = {
     neighborhood_total: {
-        label: "Empréstimos",
+        label: "Pessoas por Bairro: ",
         color: "var(--chart-2)",
     },
 } satisfies ChartConfig;

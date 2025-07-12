@@ -6,7 +6,6 @@ import { ArrowUpDown } from "lucide-react";
 import { AlertDialogDelete } from "@/components/AlertDialogDelete";
 import { UpdateDialog } from "./UpdateDialog";
 import { useState } from "react";
-import { formatPhoneNumber } from "@/utils/functions";
 import { Loan, Reader, Book } from "@/types";
 import { ReturnBook } from "./ReturnBook";
 
@@ -49,23 +48,6 @@ export const getLoanColumns = (
             cell: ({ row }) => {
                 return <div className="ml-3 font-medium">{row.getValue("name")}</div>
             }
-        },
-        {
-            accessorKey: "phone",
-            header: ({ column }) => {
-                return (
-                    <Button
-                        variant="ghost"
-                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    >
-                        Telefone
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                )
-            },
-            cell: ({row}) => {
-                return formatPhoneNumber(row.getValue("phone"));
-            },
         },
         {
             accessorKey: "book",
