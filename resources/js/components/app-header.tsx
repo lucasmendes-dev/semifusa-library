@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Globe, LayoutGrid, Menu, LibraryBig, Users, ChartArea } from 'lucide-react';
+import { Globe, LayoutGrid, Menu, LibraryBig, Users, ChartColumnIncreasing } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
@@ -34,7 +34,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Estatísticas',
         href: '/statistics',
-        icon: ChartArea,
+        icon: ChartColumnIncreasing,
     },
 ];
 

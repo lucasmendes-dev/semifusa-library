@@ -25,7 +25,7 @@ export default function Statistics({
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Leitores" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 mb-4">
                 <HeadBoxes
                     totalBooks={totalBooks}
                     readers={readers}
@@ -33,12 +33,12 @@ export default function Statistics({
 
                 <div className="grid auto-rows-min gap-4 md:grid-cols-2">
                     <MonthChart month={month}/>
-                    <NeighborhoodChart/>
+                    <NeighborhoodChart neighborhood={neighborhood} />
                 </div>
 
                 <div className="grid auto-rows-min gap-4 md:grid-cols-2">
-                    <GenderChart />
-                    <AgeChart />
+                    <GenderChart gender={gender} />
+                    <AgeChart age={age} />
                 </div>
 
             </div>

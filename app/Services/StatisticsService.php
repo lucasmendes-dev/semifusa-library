@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Address;
 use App\Models\Loan;
 use App\Models\Reader;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class StatisticsService 
 {
@@ -14,7 +14,7 @@ class StatisticsService
         $totalBooks = Loan::getTotalBooksLoaned();
         $readers = Reader::count();
         $neighborhood = $this->getLoanByNeighborhood();
-        $age = $this->getLoanByAge();
+        $age = Reader::getAgeRange();
         $gender = $this->getLoanByGender();
         $month = Loan::getLoanByMonth();
 
@@ -34,18 +34,29 @@ class StatisticsService
         $neighborhood = Address::getLoanByNeighborhood();
         $data = [];
         foreach ($neighborhood as $neigh) {
-            $data[] = [$neigh->bairro => $neigh->total];
+            $data[] = [
+                'neighborhood_name' => $neigh->bairro,
+                'neighborhood_total' => $neigh->total
+            ];
         }
         return $data;
     }
 
-    private function getLoanByAge()
+    private function getLoanByGender(): Collection
     {
-
-    }
-
-    private function getLoanByGender()
-    {
-
+        $gender = Reader::getGender();
+        $replaceValues = [
+            'M' => 'Masculino',
+            'F' => 'Feminino',
+            'O' => 'Outros',
+            'N' => 'NaoDeclarado',
+        ];
+        
+        $counter = 0;
+        foreach ($gender as $value) {
+            $value->gender = $replaceValues[$value->gender];
+            $value->fill = "var(--chart-" . ++$counter . ")";
+        }
+        return $gender;
     }
 }
