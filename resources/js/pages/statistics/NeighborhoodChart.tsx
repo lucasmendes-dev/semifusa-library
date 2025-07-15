@@ -67,7 +67,7 @@ export function NeighborhoodChart({neighborhood} : {neighborhood: any}) {
                                 position="insideLeft"
                                 offset={8}
                                 className="fill-foreground"
-                                fontSize={14}
+                                fontSize={13}
                             />
                             <LabelList
                                 dataKey="neighborhood_total"
