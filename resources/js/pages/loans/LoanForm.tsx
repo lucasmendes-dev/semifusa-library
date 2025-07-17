@@ -7,6 +7,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { cn } from "@/lib/utils";
+import { SearchBookWidget } from "./SearchBookWidget";
 import {
     Popover,
     PopoverContent,
@@ -20,11 +21,11 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
+import { SearchReaderWidget } from "./SearchReaderWidget";
 
 
 export function LoanForm({
     reader,
-    book,
     loanDate,
     returnDate,
     setReader,
@@ -34,10 +35,12 @@ export function LoanForm({
     readers,
     books,
     bookName,
+    inventoryNumber,
     activeLoansTab,
 }: LoanFormProps) {
     const parsedLoanDate = parseSingleDate(loanDate);
     const parsedReturnDate = parseSingleDate(returnDate);
+    const bookPlusInventoryNumber = String(bookName) + " - (#" + String(inventoryNumber) + ")";
 
     function parseSingleDate(dateValue: string) {
         return dateValue
@@ -51,56 +54,20 @@ export function LoanForm({
     return (
         <form className="w-full max-w-lg mt-3">
             <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+                <div className="w-full md:w-1/1 px-3 mb-4 md:mb-0">
                     <Label htmlFor="customer" className="block mb-2">Leitor <span className="text-red-400">*</span></Label>
-                    <Select
-                        value={String(reader)}
-                        onValueChange={(value) => setReader(value)}
-                    >
-                        <SelectTrigger >
-                            <SelectValue className="mb-3" placeholder="Selecione um leitor" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectGroup>
-                                {!readers.length ? <p className="text-sm ml-3">Nenhum Leitor Castrado</p>
-                                :
-                                readers.map((reader) => (
-                                    <SelectItem key={reader.id} value={String(reader.id)}>
-                                        {reader.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+                        <SearchReaderWidget readerName={reader} readers={readers} setReader={setReader}/>
                 </div>
+            </div>
 
-                <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
+            <div className="flex flex-wrap -mx-3 mb-4">
+                <div className="w-full md:w-1/1 px-3 mb-4 md:mb-0">
                     <Label htmlFor="customer" className="block mb-2">Livro <span className="text-red-400">*</span></Label>
                     {activeLoansTab
                     ?
-                        <Input id="name" value={String(bookName)} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3 cursor-not-allowed" required readOnly/>
+                        <Input id="name" value={bookPlusInventoryNumber} className="appearance-none block w-full rounded-lg py-3 px-4 mb-3 cursor-not-allowed" required readOnly/>
                     :
-                        <Select
-                            value={String(book)}
-                            onValueChange={(value) => setBook(value)}
-                        >
-                            <SelectTrigger >
-                                <SelectValue className="mb-3" placeholder="Selecione um livro" />
-                            </SelectTrigger>
-
-                            <SelectContent>
-                                <SelectGroup>
-                                    {!books.length ? <p className="text-sm ml-3">Nenhum Livro Castrado</p>
-                                    :
-                                    books.map((book) => (
-                                        <SelectItem key={book.id} value={String(book.id)}>
-                                            {book.title} ({book.inventory_number})
-                                        </SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                        <SearchBookWidget books={books} setBook={setBook}/>
                     }
                 </div>
             </div>

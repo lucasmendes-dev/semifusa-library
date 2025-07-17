@@ -19,6 +19,7 @@ export function UpdateDialog({
     open,
     setOpen
 }: UpdateBookDialogProps) {
+    const [id, setId] = useState(book.id);
     const [title, setTile] = useState(book.title);
     const [subtitle, setSubTitle] = useState(book.subtitle);
     const [author, setAuthor] = useState(book.author);
@@ -34,6 +35,7 @@ export function UpdateDialog({
             return;
         }
         router.put(`/books/${book.id}`, {
+            id,
             title,
             subtitle,
             author,

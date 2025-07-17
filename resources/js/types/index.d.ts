@@ -156,7 +156,8 @@ export interface LoanFormProps {
     setReturnDate: (value: string) => void;
     readers: Reader[],
     books: Book[],
-    bookName: Book,
+    bookName: Book|null
+    inventoryNumber: Book|null,
     activeLoansTab: boolean,
 }
 
@@ -176,7 +177,8 @@ export interface UpdateLoanDialogProps {
     setOpen: (value: boolean) => void;
     readers: Reader[],
     books: Book[],
-    bookName: Book,
+    bookName: Book|null,
+    inventoryNumber: Book|null,
     activeLoansTab: boolean
 }
 

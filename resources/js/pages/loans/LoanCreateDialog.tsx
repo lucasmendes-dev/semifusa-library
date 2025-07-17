@@ -43,12 +43,12 @@ export function LoanCreateDialog({
     };
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={setOpen} modal={false}>
             <DialogTrigger asChild>
                 <Button className="cursor-pointer">Fazer Empréstimo</Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent className="dark:bg-neutral-900">
                 <DialogHeader>
                     <DialogTitle>Realizar Novo Empréstimo</DialogTitle>
                 </DialogHeader>
@@ -66,6 +66,9 @@ export function LoanCreateDialog({
                     setReturnDate={setReturnDate}
                     readers={readers}
                     books={books}
+                    bookName={null}
+                    inventoryNumber={null}
+                    activeLoansTab={false}
                 />
 
                 <DialogFooter>

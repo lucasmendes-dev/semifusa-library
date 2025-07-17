@@ -29,7 +29,7 @@ class BookController extends Controller
     {
         $data = $request->validated();
 
-        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number']);
+        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number'], null);
         if ($inventNumberAlreadyExists) {
             return redirect()->back()->with('error', 'O número de inventário "' . $data['inventory_number'] . '" já existe!');
         }
@@ -44,7 +44,7 @@ class BookController extends Controller
         $book = $this->bookService->getBookByID($id);
         $data = $request->validated();
 
-        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number']);
+        $inventNumberAlreadyExists = $this->bookService->doesInventoryNumberAlreadyExists($data['inventory_number'], $id);
         if ($inventNumberAlreadyExists) {
             return redirect()->back()->with('error', 'O número de inventário "' . $data['inventory_number'] . '" já existe!');
         }

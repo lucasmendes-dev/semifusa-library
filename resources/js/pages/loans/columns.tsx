@@ -140,6 +140,7 @@ export const getLoanColumns = (
                 const [isDialogOpen, setIsDialogOpen] = useState(false);
                 const [returnOpen, setReturnOpen] = useState(false);
                 const bookName: Book = row.getValue('book');
+                //const inventoryNumber: Book = row.getValue('inventory_number');
 
                 return (
                     <div>
@@ -150,6 +151,7 @@ export const getLoanColumns = (
                             readers={readers}
                             books={books}
                             bookName={bookName}
+                            inventoryNumber={null}
                             activeLoansTab={activeLoansTab}
                         />
                         <AlertDialogDelete

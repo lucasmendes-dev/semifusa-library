@@ -71,8 +71,12 @@ class LoanController extends Controller
     {
         $loan = Loan::findOrFail($id);
         $loanCode = $loan->loan_code;
+        $book = $this->bookService->getBookByID($loan->book_id);
 
         $loan->delete();
+
+        $book->status = 'available';
+        $book->save();
 
         return redirect()->back()->with('success', 'Empréstimo"' . $loanCode . '" deletado com sucesso!');
     }
